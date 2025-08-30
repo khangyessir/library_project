@@ -1,0 +1,190 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f2f2f2;
+}
+
+.library-app {
+  display: flex;
+}
+
+.sidebar {
+  width: 150px;
+  background: #8f1402;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.sidebar h3 {
+  margin-bottom: 10px;
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  cursor: pointer;
+  background: #d63200;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.sidebar button:hover {
+  background: #b52a00;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.book {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.book img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.book h3 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.book button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.book button:hover {
+  background: darkred;
+}
+
+.sort-title {
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cart-icon {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  text-align: center;
+  background: #d63200;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.cart-icon:hover {
+  background: #b52a00;
+}
+
+.cart-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  width: 250px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.cart-container h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.cart-container ul {
+  list-style: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.cart-container li {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-container li:last-child {
+  border-bottom: none;
+}
+
+.cart-container button {
+  width: 100%;
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-container button:hover {
+  background: #218838;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.quantity-controls-inline {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls-inline button {
+  padding: 4px 8px;
+  margin: 0 2px;
+}
+
+.quantity-controls-inline span {
+  min-width: 20px;
+  text-align: center;
+  display: inline-block;
+}
+
+.borrow-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}

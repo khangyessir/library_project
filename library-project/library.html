@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Website</title>
+  <link rel="stylesheet" href="/library-static/library.css"/>
+</head>
+<body>
+  <div class="library-app">
+    <aside class="sidebar">
+      <div class="cart-icon">
+        <a href="/cart" style="color: white; text-decoration: none;">
+          <!-- 🛒 <span id="cart-count">0</span> -->
+           <img src="https://marketplace.canva.com/qwXGU/MAEeRuqwXGU/1/tl/canva-shopping-cart-icon-MAEeRuqwXGU.png" alt="Cart" style="width: 24px; height:24px; vertical-align: middle;"/>
+           <span id="cart-count">0</span>
+        </a>
+      </div>
+      <h3 class="sort-title">Sort</h3>
+      <button onclick="sortBooksAZ()">A - Z</button>
+      <button onclick="sortBooksZA()">Z - A</button>
+    </aside>
+    <main class="main-content">
+      <input type="text" id="searchInput" placeholder="Tìm kiếm tên sách"/>
+      <div id="bookContainer" class="book-list"></div>
+    </main>
+  </div>
+  <script src="/library-static/script.js"></script>
+</body>
+</html>
