@@ -3,7 +3,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 // Load sách
 async function fetchBooks() {
-  const res = await fetch('/library-static/books.json');
+  const res = await fetch('/library/books.json');
   books = await res.json();
   displayBooks(books);
   updateCartCount();
