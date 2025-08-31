@@ -20,25 +20,29 @@ const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true }
 });
-
 const User = mongoose.model('User', userSchema);
 
 // =====================
 // Middleware
 // =====================
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Phục vụ static files login-project/public
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Phục vụ static files library-project
+app.use('/library', express.static(path.join(__dirname, '../library-project')));
 
 // =====================
 // Routes
 // =====================
 
-// Giao diện đăng ký
+// Trang đăng ký
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
-// Giao diện đăng nhập
+// Trang đăng nhập
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
@@ -57,7 +61,7 @@ app.post('/register', async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
-    res.redirect('/library');
+    res.redirect('/library/library.html'); // chuyển sang thư viện
   } catch (err) {
     res.send('Lỗi đăng ký: ' + err.message);
   }
@@ -70,7 +74,7 @@ app.post('/login', async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (user && await bcrypt.compare(password, user.password)) {
-      res.redirect('/library');
+      res.redirect('/library/library.html');
     } else {
       res.send('Sai tài khoản hoặc mật khẩu. <a href="/login">Thử lại</a>');
     }
@@ -79,14 +83,9 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Giao diện thư viện
-app.get('/library', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'library.html'));
-});
-
-// Giao diện giỏ hàng
+// Trang giỏ hàng
 app.get('/cart', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'cart.html'));
+  res.sendFile(path.join(__dirname, '../library-project/cart.html'));
 });
 
 // =====================
