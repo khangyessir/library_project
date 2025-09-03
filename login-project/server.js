@@ -3,8 +3,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const { publishBook } = require('./mqtt-publish');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // =====================
 // Kết nối MongoDB Atlas
@@ -23,41 +26,31 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 // =====================
-// Middleware
+// Static files
 // =====================
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Phục vụ static files login-project/public
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Phục vụ static files library-project (CSS/JS)
 app.use('/library', express.static(path.join(__dirname, '../library-project')));
 
 // =====================
 // Routes
 // =====================
-
-// Trang đăng ký (URL đẹp: "/")
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
 
-// Trang đăng nhập (URL đẹp: "/login")
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Trang thư viện (URL đẹp: "/library")
 app.get('/library', (req, res) => {
   res.sendFile(path.join(__dirname, '../library-project/library.html'));
 });
 
-// Trang giỏ hàng (URL đẹp: "/cart")
 app.get('/cart', (req, res) => {
   res.sendFile(path.join(__dirname, '../library-project/cart.html'));
 });
 
-// Redirect URL cũ → route mới
+// Redirect
 app.get('/library/library.html', (req, res) => res.redirect('/library'));
 app.get('/login.html', (req, res) => res.redirect('/login'));
 
@@ -77,7 +70,7 @@ app.post('/register', async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
-    res.redirect('/library'); // route đẹp
+    res.redirect('/library');
   } catch (err) {
     res.send('Lỗi đăng ký: ' + err.message);
   }
@@ -92,13 +85,27 @@ app.post('/login', async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (user && await bcrypt.compare(password, user.password)) {
-      res.redirect('/library'); // route đẹp
+      res.redirect('/library');
     } else {
       res.send('Sai tài khoản hoặc mật khẩu. <a href="/login">Thử lại</a>');
     }
   } catch (err) {
     res.send('Lỗi đăng nhập: ' + err.message);
   }
+});
+
+// =====================
+// API Publish MQTT
+// =====================
+app.post('/publish', (req, res) => {
+  // body: { id: "book1", name: "...", shelf: 3 }
+  const { id, name, shelf } = req.body;
+  if (!id || !name) return res.status(400).send('Missing id or name');
+
+  // Gọi hàm publishBook (topic = id, payload = object)
+  publishBook(id, JSON.stringify({ name, shelf }));
+
+  res.send('✅ Published');
 });
 
 // =====================
