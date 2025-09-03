@@ -4,9 +4,9 @@ const mqtt = require('mqtt');
 // =====================
 // Load biến môi trường
 // =====================
-const HOST = process.env.HIVEMQ_HOST;   // ví dụ: xxx.s1.eu.hivemq.cloud
-const USER = process.env.HIVEMQ_USER;   // username (Publish Only)
-const PASS = process.env.HIVEMQ_PASS;   // password
+const HOST = process.env.HIVEMQ_HOST;
+const USER = process.env.HIVEMQ_USER;   // publish only
+const PASS = process.env.HIVEMQ_PASS;
 const PORT = process.env.HIVEMQ_PORT || 8883;
 
 if (!HOST || !USER || !PASS) {
