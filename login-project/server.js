@@ -1,117 +1,116 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const path = require('path');
-const bcrypt = require('bcrypt');
-const { publishBook } = require('./mqtt-publish');
+// =====================
+// Import modules
+// =====================
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const path = require("path");
+const bcrypt = require("bcrypt");
+const { publishBook } = require("./mqtt-publish");
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // =====================
-// Kết nối MongoDB Atlas
+// Middleware
 // =====================
-mongoose.connect(process.env.MONGODB_URI)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/library", express.static(path.join(__dirname, "../library-project")));
+
+// =====================
+// MongoDB Atlas
+// =====================
+mongoose
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("✅ Đã kết nối MongoDB Atlas thành công!"))
-  .catch(err => console.error("❌ Lỗi kết nối MongoDB:", err));
+  .catch((err) => console.error("❌ Lỗi kết nối MongoDB:", err));
 
 // =====================
 // Schema + Model
 // =====================
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, required: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
 });
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
 // =====================
-// Static files
+// Routes (Pages)
 // =====================
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/library', express.static(path.join(__dirname, '../library-project')));
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "public", "register.html"))
+);
+app.get("/login", (req, res) =>
+  res.sendFile(path.join(__dirname, "public", "login.html"))
+);
+app.get("/library", (req, res) =>
+  res.sendFile(path.join(__dirname, "../library-project/library.html"))
+);
+app.get("/cart", (req, res) =>
+  res.sendFile(path.join(__dirname, "../library-project/cart.html"))
+);
 
-// =====================
-// Routes
-// =====================
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html'));
-});
-
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html'));
-});
-
-app.get('/library', (req, res) => {
-  res.sendFile(path.join(__dirname, '../library-project/library.html'));
-});
-
-app.get('/cart', (req, res) => {
-  res.sendFile(path.join(__dirname, '../library-project/cart.html'));
-});
-
-// Redirect
-app.get('/library/library.html', (req, res) => res.redirect('/library'));
-app.get('/login.html', (req, res) => res.redirect('/login'));
+// Redirect cho link thừa
+app.get("/library/library.html", (req, res) => res.redirect("/library"));
+app.get("/login.html", (req, res) => res.redirect("/login"));
 
 // =====================
-// Xử lý đăng ký
+// Auth Routes
 // =====================
-app.post('/register', async (req, res) => {
+app.post("/register", async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const existing = await User.findOne({ username });
     if (existing) {
-      return res.send('Tên người dùng đã tồn tại. <a href="/login">Đăng nhập</a>');
+      return res.send(
+        '❌ Tên người dùng đã tồn tại. <a href="/login">Đăng nhập</a>'
+      );
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
-    res.redirect('/library');
+    res.redirect("/library");
   } catch (err) {
-    res.send('Lỗi đăng ký: ' + err.message);
+    res.send("❌ Lỗi đăng ký: " + err.message);
   }
 });
 
-// =====================
-// Xử lý đăng nhập
-// =====================
-app.post('/login', async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
   try {
     const user = await User.findOne({ username });
-    if (user && await bcrypt.compare(password, user.password)) {
-      res.redirect('/library');
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.redirect("/library");
     } else {
-      res.send('Sai tài khoản hoặc mật khẩu. <a href="/login">Thử lại</a>');
+      res.send('❌ Sai tài khoản hoặc mật khẩu. <a href="/login">Thử lại</a>');
     }
   } catch (err) {
-    res.send('Lỗi đăng nhập: ' + err.message);
+    res.send("❌ Lỗi đăng nhập: " + err.message);
   }
 });
 
 // =====================
-// API Publish MQTT
+// MQTT Publish Route
 // =====================
-app.post('/publish', (req, res) => {
-  // body: { id: "book1", name: "...", shelf: 3 }
+app.post("/publish", (req, res) => {
   const { id, name, shelf } = req.body;
-  if (!id || !name) return res.status(400).send('Missing id or name');
+  if (!id || !name) {
+    return res.status(400).send("❌ Thiếu id hoặc name");
+  }
 
-  // Gọi hàm publishBook (topic = id, payload = object)
+  // publishBook(topic, payload)
   publishBook(id, JSON.stringify({ name, shelf }));
 
-  res.send('✅ Published');
+  res.send("✅ Published thành công!");
 });
 
 // =====================
-// Khởi động server
+// Server start
 // =====================
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server đang chạy tại http://localhost:${PORT}`);
+  console.log(`🚀 Server chạy tại: http://localhost:${PORT}`);
 });
