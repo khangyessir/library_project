@@ -41,15 +41,41 @@ function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function confirmOrder() {
+async function confirmOrder() {
   if (cart.length === 0) {
     alert('Giỏ sách trống!');
     return;
   }
-  alert(`Bạn đã mượn ${cart.length} loại sách!`);
-  cart = [];
-  saveCart();
-  renderCart();
+
+  try {
+    // Gửi từng sách trong giỏ lên server
+    for (let book of cart) {
+      const payload = {
+        id: book.id || book.title.replace(/\s+/g, "_"), // fallback nếu chưa có id
+        name: book.title,
+        author: book.author,
+        quantity: book.quantity || 1,
+        shelf: book.shelf || 0   // nếu có thông tin kệ sách
+      };
+
+      await fetch('/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }
+
+    alert(`✅ Bạn đã mượn ${cart.length} loại sách!`);
+
+    // Reset giỏ hàng
+    cart = [];
+    saveCart();
+    renderCart();
+
+  } catch (err) {
+    console.error("❌ Lỗi khi gửi dữ liệu:", err);
+    alert("Có lỗi xảy ra khi gửi thông tin mượn sách.");
+  }
 }
 
 renderCart();
