@@ -96,13 +96,18 @@ app.post("/login", async (req, res) => {
 // MQTT Publish Route
 // =====================
 app.post("/publish", (req, res) => {
-  const { id, name, shelf } = req.body;
-  if (!id || !name) {
-    return res.status(400).send("❌ Thiếu id hoặc name");
+  const { order_id, book, shelf } = req.body;
+
+  if (!order_id || !book) {
+    return res.status(400).send("❌ Thiếu order_id hoặc book");
   }
 
-  // publishBook(topic, payload)
-  publishBook(id, JSON.stringify({ name, shelf }));
+  const payload = { order_id, book, shelf };
+
+  console.log("📤 Publish payload:", payload);
+
+  // luôn publish vào topic library/books
+  publishBook("library/books", JSON.stringify(payload));
 
   res.send("✅ Published thành công!");
 });
