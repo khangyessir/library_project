@@ -51,11 +51,9 @@ async function confirmOrder() {
     // Gửi từng sách trong giỏ lên server
     for (let book of cart) {
       const payload = {
-        id: book.id || book.title.replace(/\s+/g, "_"), // fallback nếu chưa có id
-        name: book.title,
-        author: book.author,
-        quantity: book.quantity || 1,
-        shelf: book.shelf || 0   // nếu có thông tin kệ sách
+        order_id: book.character,   // lấy ký hiệu a, b, c... từ books.json
+        book: book.title,           // tên sách
+        shelf: book.shelf || "A1"   // mặc định để demo
       };
 
       await fetch('/publish', {
