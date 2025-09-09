@@ -2,111 +2,133 @@
   {
     "title": "a",
     "cover": "https://www.nxbtre.com.vn/Images/Book/nxbtre_full_21042022_030444.jpg",
-    "author": "J.K. Rowling"
+    "author": "J.K. Rowling",
+    "character": "a"
   },
   {
     "title": "Đắc Nhân Tâm",
     "cover": "https://nhasachphuongnam.com/images/detailed/217/dac-nhan-tam-bc.jpg",
-    "author": "Dale Carnegie"
+    "author": "Dale Carnegie",
+    "character": "b"
   },
   {
     "title": "Tuổi Trẻ Đáng Giá Bao Nhiêu",
     "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1495635816i/32521178.jpg",
-    "author": "Rosie Nguyễn"
+    "author": "Rosie Nguyễn",
+    "character": "c"
   },
   {
     "title": "Dế Mèn Phiêu Lưu Ký",
     "cover": "https://bavi.edu.vn/upload/21768/fck/files/150800018_3868030666550251_8375198552020103317_n.jpg",
-    "author": "Tô Hoài"
+    "author": "Tô Hoài",
+    "character": "d"
   },
   {
     "title": "Chuyện Con Mèo Dạy Hải Âu Bay",
     "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1531668867i/12039570.jpg",
-    "author": "Luis Sepúlveda"
+    "author": "Luis Sepúlveda",
+    "character": "e"
   },
   {
     "title": "1984",
     "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnKT7EDcVU0qb7wF4btuanfI5FWpZbe3-veg&s",
-    "author": "George Orwell"
+    "author": "George Orwell",
+    "character": "f"
   },
   {
     "title": "Nhà Giả Kim",
     "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbcbjcHdfVNuisAuwZqEH3cGujYY89E6KO8g&s",
-    "author": "Paulo Coelho"
+    "author": "Paulo Coelho",
+    "character": "g"
   },
   {
     "title": "Lược Sử Thời Gian",
     "cover": "https://upload.wikimedia.org/wikipedia/vi/6/6f/L%C6%B0%E1%BB%A3c_s%E1%BB%AD_th%E1%BB%9Di_gian.jpg",
-    "author": "Stephen Hawking"
+    "author": "Stephen Hawking",
+    "character": "h"
   },
   {
     "title": "Những Kẻ Xuất Chúng (Outliers)",
     "cover": "https://bizweb.dktcdn.net/thumb/grande/100/197/269/products/nhung-ke-xuat-chung-outline-18-8-2022-01-2.jpg?v=1730357767780",
-    "author": "Malcolm Gladwell"
+    "author": "Malcolm Gladwell",
+    "character": "i"
   },
   {
     "title": "Bố Già (The Godfather)",
     "cover": "https://upload.wikimedia.org/wikipedia/vi/f/f4/Godfather-Novel-Cover.png",
-    "author": "Mario Puzo"
+    "author": "Mario Puzo",
+    "character": "j"
   },
   {
     "title": "Chiến Tranh và Hòa Bình",
     "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1518599327i/38542943.jpg",
-    "author": "Lev Tolstoy"
+    "author": "Lev Tolstoy",
+    "character": "k"
   },
   {
     "title": "Tội Ác và Hình Phạt",
     "cover": "https://bizweb.dktcdn.net/100/180/408/products/toi-ac-va-hinh-phat-bia-ao-f90d9277-c252-4e40-be3c-aba5dd887bf8-175d7ddc-6eef-437c-9905-44edcfb05752.jpg?v=1625654969073",
-    "author": "Fyodor Dostoevsky"
+    "author": "Fyodor Dostoevsky",
+    "character": "l"
   },
   {
     "title": "Đi Tìm Lẽ Sống (Man's Search for Meaning)",
     "cover": "https://salt.tikicdn.com/media/catalog/product/d/i/ditimlesong20161.u84.d20161125.t134037.152104.jpg",
-    "author": "Viktor E. Frankl"
+    "author": "Viktor E. Frankl",
+    "character": "m"
   },
   {
     "title": "Sapiens: Lược Sử Loài Người",
     "cover": "https://bizweb.dktcdn.net/100/197/269/products/sapiens-luoc-su-ve-loai-nguoi-outline-5-7-2017-02.jpg?v=1520935327270",
-    "author": "Yuval Noah Harari"
+    "author": "Yuval Noah Harari",
+    "character": "n"
   },
   {
     "title": "Thiên Tài Bên Trái, Kẻ Điên Bên Phải",
     "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630313960i/50908574.jpg",
-    "author": "Cao Minh"
+    "author": "Cao Minh",
+    "character": "o"
   },
   {
     "title": "Nhà Tù Shawshank (Rita Hayworth and Shawshank Redemption)",
     "cover": "https://nhasachphuongnam.com/images/detailed/191/71A3CNcPiqL.jpg",
-    "author": "Stephen King"
+    "author": "Stephen King",
+    "character": "p"
   },
   {
     "title": "Cuốn Theo Chiều Gió (Gone with the Wind)",
     "cover": "https://upload.wikimedia.org/wikipedia/vi/6/6b/Gone_with_the_Wind_cover.jpg",
-    "author": "Margaret Mitchell"
+    "author": "Margaret Mitchell",
+    "character": "q"
   },
   {
     "title": "Số Đỏ",
     "cover": "https://salt.tikicdn.com/media/catalog/product/s/o/so-do.jpg",
-    "author": "Vũ Trọng Phụng"
+    "author": "Vũ Trọng Phụng",
+    "character": "r"
   },
   {
     "title": "Người Nam Châm (The Secret)",
     "cover": "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1561642091l/49365806.jpg",
-    "author": "Rhonda Byrne"
+    "author": "Rhonda Byrne",
+    "character": "s"
   },
   {
     "title": "Bí Mật Tư Duy Triệu Phú (Secrets of the Millionaire Mind)",
     "cover": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdxTBUTrLTRDL5FPK6ooBtxjS6QtrAR0fgzsa6CqnUbnyOM74Ujq18pGXJmWcM7UO_l54&usqp=CAU",
-    "author": "T. Harv Eker"
+    "author": "T. Harv Eker",
+    "character": "t"
   },
   {
     "title": "SGK Toán 12 Tập 1 Chân Trời Sáng Tạo",
     "cover": "https://nhasachphuongnam.com/images/detailed/286/toan-lop-12-tap-1-chan-troi-sang-tao.jpg",
-    "author": "Nguyễn Thành Anh"
+    "author": "Nguyễn Thành Anh",
+    "character": "u"
   },
   {
     "title": "SGK Toán 12 Tập 2 Chân Trời Sáng Tạo",
     "cover": "https://toanmath.com/wp-content/uploads/2024/01/sach-giao-khoa-toan-12-tap-2-chan-troi-sang-tao.png",
-    "author": "Nguyễn Thành Anh"
+    "author": "Nguyễn Thành Anh",
+    "character": "v"
   }
 ]
