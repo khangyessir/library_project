@@ -105,9 +105,9 @@ app.post("/publish", (req, res) => {
   const payload = { order_id, book, shelf };
 
   console.log("📤 Publish payload:", payload);
-
-  // luôn publish vào topic library/books
-  publishBook("library/books", JSON.stringify(payload));
+  // publish theo order_id. ví dụ : library/books/a
+  const topic = `library/books/${order_id}`;
+  publishBook(topic, JSON.stringify(payload));
 
   res.send("✅ Published thành công!");
 });
