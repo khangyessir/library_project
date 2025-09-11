@@ -98,16 +98,16 @@ app.post("/login", async (req, res) => {
 app.post("/publish", (req, res) => {
   const { order_id, book, shelf } = req.body;
 
-  if (!order_id || !book) {
-    return res.status(400).send("❌ Thiếu order_id hoặc book");
+  if (!order_id || !book || !shelf) {
+    return res.status(400).send("❌ Thiếu order_id, book hoặc shelf");
   }
 
   const payload = { order_id, book, shelf };
 
   console.log("📤 Publish payload:", payload);
-  // publish theo order_id. ví dụ : library/books/a
-  const topic = `library/books/${order_id}`;
-  publishBook(topic, JSON.stringify(payload));
+
+  // luôn publish vào topic "library/books"
+  publishBook("library/books", JSON.stringify(payload));
 
   res.send("✅ Published thành công!");
 });
