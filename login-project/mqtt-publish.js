@@ -42,17 +42,16 @@ client.on("reconnect", () => {
 });
 
 // =====================
-// Hàm publish book info
+// Hàm publish book info (sửa lại topic)
 // =====================
-function publishBook(bookId, bookInfo) {
+function publishBook(topic, message) {
   if (!client.connected) {
     console.error("⚠️ Cannot publish, MQTT client not connected!");
     return;
   }
 
-  const topic = `library/books/${bookId}`;
   const payload =
-    typeof bookInfo === "string" ? bookInfo : JSON.stringify(bookInfo);
+    typeof message === "string" ? message : JSON.stringify(message);
 
   client.publish(topic, payload, { qos: 1, retain: true }, (err) => {
     if (err) {
@@ -62,5 +61,6 @@ function publishBook(bookId, bookInfo) {
     }
   });
 }
+
 
 module.exports = { publishBook, client };
