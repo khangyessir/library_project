@@ -96,13 +96,13 @@ app.post("/login", async (req, res) => {
 // MQTT Publish Route
 // =====================
 app.post("/publish", (req, res) => {
-  const { order_id, book, shelf } = req.body;
+  const { order_id, book, shelf, floor } = req.body;
 
-  if (!order_id || !book || !shelf) {
-    return res.status(400).send("❌ Thiếu order_id, book hoặc shelf");
+  if (!order_id || !book || !shelf || !floor) {
+    return res.status(400).send("❌ Thiếu order_id, book, shelf hoặc floor");
   }
 
-  const payload = { order_id, book, shelf };
+  const payload = { order_id, book, shelf, floor };
 
   console.log("📤 Publish payload:", payload);
 
