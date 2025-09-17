@@ -53,7 +53,8 @@ async function confirmOrder() {
       const payload = {
         order_id: book.character,   // lấy ký hiệu a, b, c... từ books.json
         book: book.title,           // tên sách
-        shelf: book.shelf || "A1"   // mặc định để demo
+        shelf: book.shelf || "A1",   // mặc định để demo
+        floor: book.floor
       };
 
       await fetch('/publish', {
